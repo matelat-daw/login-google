@@ -35,6 +35,7 @@ export class LoginComponent implements OnInit {
           localStorage.setItem('userEmail', user.email);
           
           this.verifyGoogleUserServerSide(user.idToken);
+          this.router.navigate(['/welcome']);
         }
       });
     }
@@ -48,7 +49,6 @@ export class LoginComponent implements OnInit {
           console.log('Inicio de Sesión con Google Exitoso:', response);
           // Guarda el token JWT recibido
           localStorage.setItem('jwt', response.Token);
-          this.router.navigate(['/welcome']);
         },
         error: (error) => {
           console.error('Error al Iniciar Sesión:', error);
