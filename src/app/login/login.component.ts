@@ -45,8 +45,8 @@ export class LoginComponent implements OnInit {
     // const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
     
     // Enviar el token en el cuerpo de la petición en lugar de en la URL
-    this.http.get<any>('https://88.25.64.124/api/Account/GoogleLogin/' + token)
-    // this.http.get<any>('https://localhost:7035/api/Account/GoogleLogin/' + token)
+    // this.http.get<any>('https://88.25.64.124/api/Account/GoogleLogin/' + token)
+    this.http.get<any>('https://localhost:7035/api/Account/GoogleLogin/' + token)
     .subscribe({
       next: (response) => {
         console.log('Inicio de Sesión con Google Exitoso:', response);
