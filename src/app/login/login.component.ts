@@ -41,21 +41,19 @@ export class LoginComponent implements OnInit {
   }
 
   verifyGoogleUserServerSide(token: string): void {
-    // Usar headers para enviar el token de forma segura
-    // const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-    
-    // Enviar el token en el cuerpo de la petición en lugar de en la URL
-    // this.http.get<any>('https://88.25.64.124/api/Account/GoogleLogin/' + token)
-    this.http.get<any>('https://localhost:7035/api/Account/GoogleLogin/' + token)
-    .subscribe({
-      next: (response) => {
-        console.log('Inicio de Sesión con Google Exitoso:', response);
-        this.router.navigate(['/welcome']);
-      },
-      error: (error) => {
-        console.error('Error al Iniciar Sesión:', error);
-        this.loginError = 'Error al verificar credenciales. Por favor, intente nuevamente.';
-      }
-    });
+    // this.http.post<any>('https://88.25.64.124/api/Account/GoogleLogin', { token })
+    this.http.post<any>('https://localhost:7035/api/Account/GoogleLogin', { token })
+      .subscribe({
+        next: (response) => {
+          console.log('Inicio de Sesión con Google Exitoso:', response);
+          // Guarda el token JWT recibido
+          localStorage.setItem('jwt', response.Token);
+          this.router.navigate(['/welcome']);
+        },
+        error: (error) => {
+          console.error('Error al Iniciar Sesión:', error);
+          this.loginError = 'Error al verificar credenciales. Por favor, intente nuevamente.';
+        }
+      });
   }
 }
