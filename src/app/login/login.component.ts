@@ -2,7 +2,7 @@ import { Component, OnInit, PLATFORM_ID, Inject } from '@angular/core';
 import { SocialAuthService, GoogleSigninButtonModule } from '@abacritt/angularx-social-login';
 import { Router } from '@angular/router';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'app-login',
@@ -55,7 +55,15 @@ export class LoginComponent implements OnInit {
   }
 
   verifyGoogleUserServerSide(token: string): void {
-    this.http.post<any>('https://88.25.64.124/api/Account/GoogleLogin', { token })
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*'
+      }),
+      withCredentials: false // Intenta sin credenciales
+    };
+
+    this.http.post<any>('https://88.25.64.124/api/Account/GoogleLogin', { token }, httpOptions)
     // this.http.post<any>('https://localhost:7035/api/Account/GoogleLogin', { token })
       .subscribe({
         next: (response) => {
