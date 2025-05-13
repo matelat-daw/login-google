@@ -33,11 +33,34 @@ export class WelcomeComponent implements OnInit {
     }
   }
 
+  // logout(): void {
+  //   this.authService.signOut();
+  //   if (this.isBrowser) {
+  //     localStorage.removeItem('user');
+  //   }
+  //   this.router.navigate(['/login']);
+  // }
+
   logout(): void {
-    this.authService.signOut();
+    // Primero limpiamos el localStorage
     if (this.isBrowser) {
       localStorage.removeItem('user');
+      localStorage.removeItem('userToken');
+      localStorage.removeItem('userName');
+      localStorage.removeItem('userEmail');
+      localStorage.removeItem('jwt');
     }
-    this.router.navigate(['/login']);
+    
+    // Luego hacemos el signOut, pero sin redirección inmediata
+    this.authService.signOut().then(() => {
+      // Esperamos un momento antes de redirigir para evitar conflictos
+      setTimeout(() => {
+        this.router.navigate(['/login']);
+      }, 100);
+    }).catch(error => {
+      console.error('Error durante el cierre de sesión:', error);
+      // En caso de error, intentamos navegar de todos modos
+      this.router.navigate(['/login']);
+    });
   }
 }
