@@ -63,7 +63,7 @@ export class LoginComponent implements OnInit {
       withCredentials: false // Intenta sin credenciales
     };
 
-    this.http.post<any>('https://88.25.64.124/api/Account/GoogleLogin', { token }, httpOptions)
+    this.http.post<any>('https://88.24.26.59/api/Account/GoogleLogin', { token }, httpOptions)
     // this.http.post<any>('https://localhost:7035/api/Account/GoogleLogin', { token })
       .subscribe({
         next: (response) => {
