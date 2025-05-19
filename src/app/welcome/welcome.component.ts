@@ -14,7 +14,7 @@ import { HttpClient } from '@angular/common/http';
 export class WelcomeComponent implements OnInit {
   user: any;
   isBrowser: boolean;
-  private readonly apiUrl = 'https://localhost:7035/api/Account/Logout';
+  private readonly apiUrl = 'https://88.24.26.59/api/Account/Logout';
 
   constructor(
     private http: HttpClient,

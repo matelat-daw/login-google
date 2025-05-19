@@ -1,6 +1,8 @@
-<div class="welcome-container" *ngIf="user">
-    <img [src]="user.photoUrl" alt="Foto de perfil" class="profile-pic">
-    <h2>¡Bienvenido, {{user.name}}!</h2>
-    <p>Email: {{user.email}}</p>
-    <button (click)="logout()" class="logout-btn">Cerrar sesión</button>
-  </div>
+@if (user) {
+    <div class="welcome-container">
+        <img [src]="user.photoUrl" alt="Foto de perfil" class="profile-pic">
+        <h2>¡Bienvenido, {{user.name}}!</h2>
+        <p>Email: {{user.email}}</p>
+        <button (click)="logout()" class="logout-btn">Cerrar sesión</button>
+    </div>
+}
